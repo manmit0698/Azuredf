@@ -1,0 +1,53 @@
+{
+	"name": "taxir",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "taxi-source-2013-revenue.csv",
+				"container": "modyy98"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "date",
+				"type": "String"
+			},
+			{
+				"name": "distance",
+				"type": "String"
+			},
+			{
+				"name": "fare",
+				"type": "String"
+			},
+			{
+				"name": "extra",
+				"type": "String"
+			},
+			{
+				"name": "tax",
+				"type": "String"
+			},
+			{
+				"name": "tip",
+				"type": "String"
+			},
+			{
+				"name": "abc",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,33 @@
+{
+	"name": "ECDCjson",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "github_ecdc_file_list.json",
+				"container": "modyy98"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"sourcebaseURL": {
+					"type": "string"
+				},
+				"relativeurl": {
+					"type": "string"
+				},
+				"FileName": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

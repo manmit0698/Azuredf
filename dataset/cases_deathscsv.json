@@ -1,0 +1,40 @@
+{
+	"name": "cases_deathscsv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "coviddatahttp",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"sourcebaseURL": {
+					"value": "@dataset().sourcebaseURL",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"relativeurl": {
+				"type": "string"
+			},
+			"sourcebaseURL": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@dataset().relativeurl",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

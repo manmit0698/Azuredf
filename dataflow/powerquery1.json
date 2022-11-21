@@ -1,0 +1,28 @@
+{
+	"name": "powerquery1",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "taxis",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  taxis",
+					"dataset": {
+						"referenceName": "taxis",
+						"type": "DatasetReference"
+					}
+				},
+				{
+					"name": "taxir",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~>  taxir",
+					"dataset": {
+						"referenceName": "taxir",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"script": "section Section1;\r\nshared taxis = let AdfDoc = AzureStorage.BlobContents(\"https://manmit98.blob.core.windows.net/modyy98/taxi-source-2013.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared taxir = let AdfDoc = AzureStorage.BlobContents(\"https://manmit98.blob.core.windows.net/modyy98/taxi-source-2013-revenue.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared UserQuery = let Source = #\"taxis\",\r\n  #\"Merged queries\" = Table.NestedJoin(Source, {\"date\"}, taxir, {\"date\"}, \"taxir\", JoinKind.LeftOuter),\r\n  #\"Expanded taxir\" = Table.ExpandTableColumn(#\"Merged queries\", \"taxir\", {\"distance\", \"fare\", \"extra\", \"tax\", \"tip\", \"abc\"}, {\"distance\", \"fare\", \"extra\", \"tax\", \"tip\", \"abc\"}) in #\"Expanded taxir\";\r\n",
+			"documentLocale": "en-us"
+		}
+	}
+}

@@ -1,0 +1,41 @@
+{
+	"name": "DestinationDataset_uxh",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "NAME",
+				"type": "varchar"
+			},
+			{
+				"name": "UNIVERSITY",
+				"type": "varchar"
+			},
+			{
+				"name": "DIFFICULTY",
+				"type": "varchar"
+			},
+			{
+				"name": "LINK",
+				"type": "varchar"
+			},
+			{
+				"name": "ABOUT",
+				"type": "varchar"
+			},
+			{
+				"name": "COURSE DESCRIPTION",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EDX"
+		}
+	}
+}

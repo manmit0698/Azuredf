@@ -1,0 +1,39 @@
+{
+	"name": "DestinationDataset_zbf",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics3",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "COURSE_TITLE",
+				"type": "varchar"
+			},
+			{
+				"name": "DESCRIPTION",
+				"type": "varchar"
+			},
+			{
+				"name": "AVAILIBLITY",
+				"type": "varchar"
+			},
+			{
+				"name": "COST",
+				"type": "varchar"
+			},
+			{
+				"name": "DATE",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "COURSE DATA"
+		}
+	}
+}

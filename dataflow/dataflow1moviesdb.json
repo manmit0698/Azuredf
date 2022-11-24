@@ -15,11 +15,15 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "moviesdb",
+						"referenceName": "DestinationDataset_uxh",
 						"type": "DatasetReference"
 					},
 					"name": "sink1",
-					"description": "Aggregate rating for comedy "
+					"description": "Aggregate rating for comedy ",
+					"rejectedDataLinkedService": {
+						"referenceName": "AzureBlobStorage1",
+						"type": "LinkedServiceReference"
+					}
 				}
 			],
 			"transformations": [
@@ -44,14 +48,28 @@
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 filter(toInteger(year)>= 1910 && toInteger(year) <= 2000 && rlike(genres, 'Comedy')) ~> filter1",
 				"filter1 aggregate(groupBy(year),",
-				"     {aggregate1 } = avg(toInteger(Rating))) ~> aggregate1",
+				"     Rating = avg(toInteger(Rating))) ~> aggregate1",
 				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     umask: 0022,",
-				"     preCommands: [],",
-				"     postCommands: [],",
+				"     input(",
+				"          NAME as string,",
+				"          UNIVERSITY as string,",
+				"          DIFFICULTY as string,",
+				"          LINK as string,",
+				"          ABOUT as string,",
+				"          {COURSE DESCRIPTION} as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     preCommands: [],",
+				"     postCommands: []) ~> sink1"
 			]
 		}
 	}
